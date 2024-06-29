@@ -27,6 +27,7 @@
      <widget class="QLabel" name="label">
       <property name="font">
        <font>
+        <family>华文中宋</family>
         <pointsize>12</pointsize>
        </font>
       </property>
@@ -40,6 +41,11 @@
     </item>
     <item>
      <widget class="QLabel" name="whatnext_label">
+      <property name="font">
+       <font>
+        <family>华文中宋</family>
+       </font>
+      </property>
       <property name="text">
        <string>whatnext_label</string>
       </property>
@@ -50,6 +56,17 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton">
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	border: none;
+	color: #ECEFF4;
+	background-color: #2E3440;
+	font: 500 10pt &quot;SimHei&quot;;
+	border-radius: 6px;
+	width: 158px;  
+    height: 28px;  
+}</string>
+      </property>
       <property name="text">
        <string>确定</string>
       </property>

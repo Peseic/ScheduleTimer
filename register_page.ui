@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">    background-color: #D8DEE9;</string>
+  </property>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
@@ -24,8 +27,15 @@
    </property>
    <property name="font">
     <font>
+     <family>黑体</family>
      <pointsize>12</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    font: 12pt &quot;黑体&quot;;
+    color: #4C566A;</string>
    </property>
    <property name="text">
     <string>密码：</string>
@@ -42,8 +52,15 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>18</pointsize>
+     <family>华文中宋</family>
+     <pointsize>20</pointsize>
+     <italic>false</italic>
+     <fontweight>Medium</fontweight>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    font: 500 20pt &quot;华文中宋&quot;;
+    color: #2E3440;</string>
    </property>
    <property name="text">
     <string>注册</string>
@@ -58,6 +75,15 @@
      <height>28</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {   /* confirm login */
+	border: none;
+	color: #2E3440;
+	background-color: #8FBCBB;
+	font: 500 10pt &quot;SimHei&quot;;
+	border-radius: 6px;
+}</string>
+   </property>
    <property name="text">
     <string>完成</string>
    </property>
@@ -71,8 +97,14 @@
      <height>25</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #f0f0f0</string>
+   </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
    </property>
   </widget>
   <widget class="QLineEdit" name="account_edit">
@@ -83,6 +115,9 @@
      <width>113</width>
      <height>25</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #f0f0f0</string>
    </property>
    <property name="text">
     <string/>
@@ -99,8 +134,15 @@
    </property>
    <property name="font">
     <font>
+     <family>黑体</family>
      <pointsize>12</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    font: 12pt &quot;黑体&quot;;
+    color: #4C566A;</string>
    </property>
    <property name="text">
     <string>账号：</string>

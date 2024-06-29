@@ -143,6 +143,17 @@ MainWindow::MainWindow(QWidget *parent)
     // connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::on_pushButton_2_clicked);
 
     this->setWindowTitle(Q_GLOBAL_STATIC_CLASS(WindowTitles).MAINWINDOW_WINDOW_TITLE);
+
+    /*  // UI: Change button style after text edited. This feature might be ditched.
+    for(int i = 0; i < 7; i++){
+        for(int k = 0; k < 12; k++){
+            auto& button = day_class[i][k];
+            connect(button, &QPushButton::textChanged, this, [this, button]() {
+                updateButtonStyle(button);
+            });
+        }
+    }
+    */
 }
 
 MainWindow::~MainWindow()
@@ -193,6 +204,7 @@ void MainWindow::update_ddl(){
 }
 void MainWindow::create_ddl_table(){
     QSqlDatabase db = QSqlDatabase::database("qt_sql_default_connection");
+
     QSqlQuery query;
     QString create = QString(
                          "CREATE TABLE %1_ddl ("
@@ -201,8 +213,14 @@ void MainWindow::create_ddl_table(){
                          "thing TEXT"
                          ")"
                          ).arg(username);
+
+    qDebug() << "SQL Statement: " << create; // Print the SQL statement
+
     if(!query.exec(create)){
         qDebug() << "创建DDL表失败！";
+        qDebug() << "SQL Error: " << query.lastError().text(); // Print the SQL error
+    } else {
+        qDebug() << "DDL table created successfully!";
     }
 }
 bool MainWindow::is_exsit_ddl_table(){

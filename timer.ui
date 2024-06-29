@@ -24,8 +24,29 @@
    </property>
    <property name="font">
     <font>
+     <family>华文中宋</family>
      <pointsize>18</pointsize>
+     <italic>false</italic>
+     <fontweight>Medium</fontweight>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    QPushButton {   /* Exit button on the top */
+        background-color: #BF616A;  
+        color: #ECEFF4; 
+        border: none;
+        font: 500 18pt &quot;华文中宋&quot;;
+        border-radius: 8px;
+        padding: 2px;
+    }
+    
+    QPushButton:hover {
+        background-color: #D08770; 
+    }
+    
+    QPushButton:pressed {
+        background-color: #A5424A;  
+    }</string>
    </property>
    <property name="text">
     <string>退出</string>
@@ -42,7 +63,10 @@
    </property>
    <property name="font">
     <font>
+     <family>华文中宋</family>
      <pointsize>18</pointsize>
+     <italic>false</italic>
+     <fontweight>Medium</fontweight>
     </font>
    </property>
    <property name="toolTip">
@@ -51,32 +75,30 @@
    <property name="toolTipDuration">
     <number>10000000</number>
    </property>
+   <property name="styleSheet">
+    <string notr="true">    QPushButton {   /* Menu buttons on the top */
+        background-color: #3B4252; 
+        color: #ECEFF4; 
+        border: none;
+        font: 500 18pt &quot;华文中宋&quot;;
+        border-radius: 8px;
+        padding: 2px;
+    }
+    QPushButton:hover {
+        background-color: #4C566A; 
+    }
+    QPushButton:pressed {
+        background-color: #2E3440; 
+    }</string>
+   </property>
    <property name="text">
     <string>课表</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_3">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>0</y>
-     <width>101</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>GPT</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>105</x>
      <y>0</y>
      <width>101</width>
      <height>41</height>
@@ -84,8 +106,27 @@
    </property>
    <property name="font">
     <font>
+     <family>华文中宋</family>
      <pointsize>18</pointsize>
+     <italic>false</italic>
+     <fontweight>Medium</fontweight>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    QPushButton {   /* Menu buttons on the top */
+        background-color: #3B4252; 
+        color: #ECEFF4; 
+        border: none;
+        font: 500 18pt &quot;华文中宋&quot;;
+        border-radius: 8px;
+        padding: 2px;
+    }
+    QPushButton:hover {
+        background-color: #4C566A; 
+    }
+    QPushButton:pressed {
+        background-color: #2E3440; 
+    }</string>
    </property>
    <property name="text">
     <string>番茄钟</string>
@@ -397,6 +438,17 @@
       </item>
       <item>
        <widget class="QPushButton" name="timer_start_bt">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: none;
+	color: #ECEFF4;
+	background-color: #2E3440;
+	font: 500 12pt &quot;SimHei&quot;;
+	border-radius: 6px;
+	width: 93px;  
+    height: 28px;  
+}</string>
+        </property>
         <property name="text">
          <string>开始</string>
         </property>
@@ -404,6 +456,17 @@
       </item>
       <item>
        <widget class="QPushButton" name="timer_stop_bt">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: none;
+	color: #ECEFF4;
+	background-color: #2E3440;
+	font: 500 12pt &quot;SimHei&quot;;
+	border-radius: 6px;
+	width: 93px;  
+    height: 28px;  
+}</string>
+        </property>
         <property name="text">
          <string>暂停</string>
         </property>
@@ -411,6 +474,17 @@
       </item>
       <item>
        <widget class="QPushButton" name="timer_reset_bt">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: none;
+	color: #ECEFF4;
+	background-color: #2E3440;
+	font: 500 12pt &quot;SimHei&quot;;
+	border-radius: 6px;
+	width: 93px;  
+    height: 28px;  
+}</string>
+        </property>
         <property name="text">
          <string>重置</string>
         </property>

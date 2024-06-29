@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">    background-color: #D8DEE9;
+</string>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -24,8 +28,15 @@
    </property>
    <property name="font">
     <font>
+     <family>黑体</family>
      <pointsize>12</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    font: 12pt &quot;黑体&quot;;
+    color: #2e3440;</string>
    </property>
    <property name="text">
     <string>开始日期：</string>
@@ -42,8 +53,15 @@
    </property>
    <property name="font">
     <font>
+     <family>黑体</family>
      <pointsize>12</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    font: 12pt &quot;黑体&quot;;
+    color: #2e3440;</string>
    </property>
    <property name="text">
     <string>截止日期:</string>
@@ -58,8 +76,26 @@
      <height>28</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton { /* confirm */
+    border: none;
+    color: #2E3440;
+    background-color: #64a6bd;
+    font: 500 10pt &quot;SimHei&quot;;
+    border-radius: 6px;
+}
+QPushButton:hover {
+    background-color: #82b9d3; /* lighter shade for hover */
+}
+QPushButton:pressed {
+    background-color: #50819a; /* darker shade for pressed */
+}</string>
+   </property>
    <property name="text">
     <string>确定</string>
+   </property>
+   <property name="default">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
@@ -71,11 +107,26 @@
      <height>28</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton { /* cancel */ 
+    border: none;
+    color: #2E3440;
+    background-color: #f4cae0;
+    font: 500 10pt &quot;SimHei&quot;;
+    border-radius: 6px;
+}
+QPushButton:hover {
+    background-color: #f8d7e7; /* lighter shade for hover */
+}
+QPushButton:pressed {
+    background-color: #d49db3; /* darker shade for pressed */
+}</string>
+   </property>
    <property name="text">
     <string>取消</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>180</x>
@@ -86,10 +137,18 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QDateEdit" name="dateEdit_start"/>
+     <widget class="QDateEdit" name="dateEdit_start">
+      <property name="styleSheet">
+       <string notr="true">background-color: #f0f0f0</string>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QDateEdit" name="dateEdit_end"/>
+     <widget class="QDateEdit" name="dateEdit_end">
+      <property name="styleSheet">
+       <string notr="true">background-color: #f0f0f0</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

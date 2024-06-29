@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">    background-color: #D8DEE9;</string>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -21,6 +24,10 @@
      <width>81</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    font: 10pt &quot;黑体&quot;;
+    color: #2e3440;</string>
    </property>
    <property name="text">
     <string>输入事项：</string>
@@ -31,9 +38,12 @@
     <rect>
      <x>160</x>
      <y>30</y>
-     <width>171</width>
+     <width>191</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    background-color: #f0f0f0;</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
@@ -44,6 +54,22 @@
      <width>93</width>
      <height>28</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton { /* confirm */
+    border: none;
+    color: #2E3440;
+    background-color: #64a6bd;
+    font: 500 10pt &quot;SimHei&quot;;
+    border-radius: 6px;
+}
+QPushButton:hover {
+    background-color: #82b9d3; /* lighter shade for hover */
+}
+QPushButton:pressed {
+    background-color: #50819a; /* darker shade for pressed */
+}
+</string>
    </property>
    <property name="text">
     <string>确定</string>
@@ -58,6 +84,21 @@
      <height>28</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton { /* cancel */ 
+    border: none;
+    color: #2E3440;
+    background-color: #f4cae0;
+    font: 500 10pt &quot;SimHei&quot;;
+    border-radius: 6px;
+}
+QPushButton:hover {
+    background-color: #f8d7e7; /* lighter shade for hover */
+}
+QPushButton:pressed {
+    background-color: #d49db3; /* darker shade for pressed */
+}</string>
+   </property>
    <property name="text">
     <string>取消</string>
    </property>
@@ -71,6 +112,10 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">    font: 10pt &quot;黑体&quot;;
+    color: #2e3440;</string>
+   </property>
    <property name="text">
     <string>输入时长：</string>
    </property>
@@ -80,13 +125,17 @@
     <rect>
      <x>160</x>
      <y>60</y>
-     <width>171</width>
+     <width>199</width>
      <height>51</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QSpinBox" name="setclass_Spinbox_h"/>
+     <widget class="QSpinBox" name="setclass_Spinbox_h">
+      <property name="styleSheet">
+       <string notr="true">    background-color: #f0f0f0;</string>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_3">
@@ -96,7 +145,11 @@
      </widget>
     </item>
     <item>
-     <widget class="QSpinBox" name="setclass_Spinbox_m"/>
+     <widget class="QSpinBox" name="setclass_Spinbox_m">
+      <property name="styleSheet">
+       <string notr="true">    background-color: #f0f0f0;</string>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_4">
@@ -106,7 +159,11 @@
      </widget>
     </item>
     <item>
-     <widget class="QSpinBox" name="setclass_Spinbox_s"/>
+     <widget class="QSpinBox" name="setclass_Spinbox_s">
+      <property name="styleSheet">
+       <string notr="true">    background-color: #f0f0f0;</string>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_5">

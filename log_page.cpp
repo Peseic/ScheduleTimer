@@ -11,6 +11,8 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QMessageBox>
+#include <QTimer>       // such that the messagebox auto closes after some time
+
 Log_page::Log_page(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Log_page)
@@ -30,7 +32,17 @@ void Log_page::on_finish_button_clicked()
     QString username = ui->account_edit->text();
     QString password = ui->password_edit->text();
     if(Log_page::isUserExist(username, password)){ //登录成功
-        QMessageBox::information(this,"提示","登录成功");
+        // NEW implementation, auto close after specified (1000) milliseconds
+        QMessageBox* msgBox = new QMessageBox(this);
+        msgBox->setWindowTitle("提示");
+        msgBox->setText("登录成功");
+        msgBox->setStandardButtons(QMessageBox::Ok);
+
+        QTimer::singleShot(1000, msgBox, &QMessageBox::accept);
+        msgBox->exec();
+
+        // OLD implementation, need to press "OK"
+        // QMessageBox::information(this,"提示","登录成功");
         emit complete_log(username);
     }
     else{

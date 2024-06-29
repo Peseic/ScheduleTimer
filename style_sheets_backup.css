@@ -1,0 +1,213 @@
+/***************************************************************************************/
+/* THIS IS AN INDEX OF STYLE SHEETS USED IN ScheduleTimer: BUTTONS, TEXT, ETC.         */
+/* WITH THE EXCEPTION OF QPushButton, DO NOT PASTE THE BRACES {} INTO THE STYLE SHEET! */
+/***************************************************************************************/
+
+/*****************/
+/* start_use.ui  */
+/*****************/
+background {
+    background-color: #D8DEE9;
+}
+title_text {
+    font: 500 25pt "华文中宋";
+    color: #2E3440;
+}
+QPushButton {   /* login or register */
+	border: none;
+	color: #ECEFF4;
+	background-color: #2E3440;
+	font: 500 10pt "SimHei";
+	border-radius: 6px;
+}
+
+/********************/
+/* log_page.ui      */
+/********************/
+
+background {
+    background-color: #D8DEE9;
+}
+title_text {
+    font: 500 20pt "华文中宋";
+    color: #2E3440;
+}
+main_text {
+    font: 12pt "黑体";
+    color: #4C566A;
+}
+QPushButton {   /* confirm login */
+	border: none;
+	color: #2E3440;
+	background-color: #88C0D0;
+	font: 500 10pt "SimHei";
+	border-radius: 6px;
+}
+
+/********************/
+/* register_page.ui */
+/********************/
+
+background {
+    background-color: #D8DEE9;
+}
+title_text {
+    font: 500 20pt "华文中宋";
+    color: #2E3440;
+}
+main_text {
+    font: 12pt "黑体";
+    color: #4C566A;
+}
+QPushButton {   /* confirm register */
+	border: none;
+	color: #2E3440;
+	background-color: #8FBCBB;
+	font: 500 10pt "SimHei";
+	border-radius: 6px;
+}
+
+/********************/
+/* mainwindow.ui    */
+/********************/
+
+    /* Menu buttons on the top */
+    QPushButton {   /* Menu buttons on the top */
+        background-color: #3B4252; 
+        color: #ECEFF4; 
+        border: none;
+        font: 500 18pt "华文中宋";
+        border-radius: 8px;
+        padding: 2px;
+    }
+    QPushButton:hover {
+        background-color: #4C566A; 
+    }
+    QPushButton:pressed {
+        background-color: #2E3440; 
+    }
+
+    QPushButton {   /* Exit button on the top */
+        background-color: #BF616A;  
+        color: #ECEFF4; 
+        border: none;
+        font: 500 18pt "华文中宋";
+        border-radius: 8px;
+        padding: 2px;
+    }
+    QPushButton:hover {
+        background-color: #D08770; 
+    }
+    QPushButton:pressed {
+        background-color: #A5424A;  
+    }
+
+    /* 3 buttons on the right */
+    QPushButton {   /* Go button */
+        background-color: #4b956b;  
+        color: #ECEFF4; 
+        border: none;
+        font: 500 12pt "华文中宋";
+        border-radius: 8px;
+        padding: 2px;
+        width: 81px;  
+        height: 31px;  
+    }
+    QPushButton:hover {
+        background-color: #D08770; 
+    }
+    QPushButton:pressed {
+        background-color: #A5424A;  
+    }
+    QPushButton {   /* 2 large buttons */
+        background-color: #3B4252;  
+        color: #ECEFF4; 
+        border: none;
+        font: 500 12pt "华文中宋";
+        border-radius: 8px;
+        padding: 2px;
+        width: 181px;  
+        height: 41px;  
+    }
+    QPushButton:hover {
+        background-color: #D08770; 
+    }
+    QPushButton:pressed {
+        background-color: #A5424A;  
+    }
+
+
+
+background {
+    background-color: #ECEFF4;
+}
+
+QPushButton {   /* 12 * 7 classes */
+    background-color: #5E81AC; 
+    color: #ECEFF4; 
+    border: none;
+    font: 500 10pt "SimHei";
+    border-radius: 6px;
+    padding: 5px;
+}
+QPushButton:hover {
+    background-color: #81A1C1; 
+}
+QPushButton:pressed {
+    background-color: #88C0D0; 
+}
+
+/********************/
+/* choosetime.ui    */
+/********************/
+/********************/
+/* add_dll.ui       */
+/********************/
+background {
+    background-color: #D8DEE9;
+}
+
+main_text {
+    font: 12pt "黑体";
+    color: #2e3440;
+}
+
+QPushButton { /* confirm */
+    border: none;
+    color: #2E3440;
+    background-color: #64a6bd;
+    font: 500 10pt "SimHei";
+    border-radius: 6px;
+}
+QPushButton:hover {
+    background-color: #82b9d3; /* lighter shade for hover */
+}
+QPushButton:pressed {
+    background-color: #50819a; /* darker shade for pressed */
+}
+
+QPushButton { /* cancel */ 
+    border: none;
+    color: #2E3440;
+    background-color: #f4cae0;
+    font: 500 10pt "SimHei";
+    border-radius: 6px;
+}
+QPushButton:hover {
+    background-color: #f8d7e7; /* lighter shade for hover */
+}
+QPushButton:pressed {
+    background-color: #d49db3; /* darker shade for pressed */
+}
+
+/********************/
+/* set_class.ui     */
+/********************/
+
+/********************/
+/* timer.ui         */
+/********************/
+
+/********************/
+/* timer_popup.ui   */
+/********************/

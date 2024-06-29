@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">    background-color: #D8DEE9;
+</string>
+  </property>
   <widget class="QDateEdit" name="dateEdit">
    <property name="geometry">
     <rect>
@@ -21,6 +25,10 @@
      <width>141</width>
      <height>25</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    background-color: #f0f0f0;
+</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -34,8 +42,15 @@
    </property>
    <property name="font">
     <font>
+     <family>黑体</family>
      <pointsize>12</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    font: 12pt &quot;黑体&quot;;
+    color: #2e3440;</string>
    </property>
    <property name="text">
     <string>日期：</string>
@@ -52,8 +67,15 @@
    </property>
    <property name="font">
     <font>
+     <family>黑体</family>
      <pointsize>12</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    font: 12pt &quot;黑体&quot;;
+    color: #2e3440;</string>
    </property>
    <property name="text">
     <string>事项：</string>
@@ -68,6 +90,10 @@
      <height>25</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">    background-color: #f0f0f0;
+</string>
+   </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
@@ -80,8 +106,15 @@
    </property>
    <property name="font">
     <font>
+     <family>黑体</family>
      <pointsize>12</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">    font: 12pt &quot;黑体&quot;;
+    color: #2e3440;</string>
    </property>
    <property name="text">
     <string>时间：</string>
@@ -96,6 +129,10 @@
      <height>25</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">    background-color: #f0f0f0;
+</string>
+   </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
@@ -105,6 +142,21 @@
      <width>93</width>
      <height>28</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton { /* confirm */
+    border: none;
+    color: #2E3440;
+    background-color: #64a6bd;
+    font: 500 10pt &quot;SimHei&quot;;
+    border-radius: 6px;
+}
+QPushButton:hover {
+    background-color: #82b9d3; /* lighter shade for hover */
+}
+QPushButton:pressed {
+    background-color: #50819a; /* darker shade for pressed */
+}</string>
    </property>
    <property name="text">
     <string>确定</string>
@@ -119,10 +171,33 @@
      <height>28</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton { /* cancel */ 
+    border: none;
+    color: #2E3440;
+    background-color: #f4cae0;
+    font: 500 10pt &quot;SimHei&quot;;
+    border-radius: 6px;
+}
+QPushButton:hover {
+    background-color: #f8d7e7; /* lighter shade for hover */
+}
+QPushButton:pressed {
+    background-color: #d49db3; /* darker shade for pressed */
+}</string>
+   </property>
    <property name="text">
     <string>取消</string>
    </property>
   </widget>
+  <zorder>label</zorder>
+  <zorder>label_2</zorder>
+  <zorder>label_3</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>pushButton_2</zorder>
+  <zorder>dateEdit</zorder>
+  <zorder>timeEdit</zorder>
+  <zorder>lineEdit</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -11,6 +11,8 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QMessageBox>
+#include <QTimer>       // such that the messagebox auto closes after some time
+
 register_page::register_page(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::register_page)
@@ -34,7 +36,19 @@ void register_page::on_finish_button_clicked()
     }
     else{ // 创建新用户
         registerUser(username, password);
-        QMessageBox::information(this, "提示", "账号创建成功");
+
+        // NEW implementation, auto closes after specified (1000) milliseconds
+        QMessageBox* msgBox = new QMessageBox(this);
+        msgBox->setWindowTitle("提示");
+        msgBox->setText("账号创建成功");
+        msgBox->setStandardButtons(QMessageBox::Ok);
+
+        QTimer::singleShot(1000, msgBox, &QMessageBox::accept);
+        msgBox->exec();
+
+        // OLD implementation, needs to press "OK"
+        // QMessageBox::information(this, "提示", "账号创建成功");
+
         emit complete_register(username);
     }
 }
