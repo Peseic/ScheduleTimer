@@ -2,6 +2,7 @@
 #include "ui_start_use.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "window_titles.h"
 #include <QMainWindow>
 Start_use::Start_use(QWidget *parent)
     : QDialog(parent)
@@ -10,6 +11,8 @@ Start_use::Start_use(QWidget *parent)
     ui->setupUi(this);
     connect(regi, SIGNAL(complete_register(QString)), this, SLOT(execute_main(QString)));
     connect(log, SIGNAL(complete_log(QString)), this, SLOT(execute_main(QString)));
+
+    this->setWindowTitle(Q_GLOBAL_STATIC_CLASS(WindowTitles).START_USE_WINDOW_TITLE);  // Window Title
 }
 
 Start_use::~Start_use()

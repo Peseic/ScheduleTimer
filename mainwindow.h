@@ -13,6 +13,13 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
+struct ClassInfo {
+    QString name;
+    int hours;
+    int minutes;
+    int seconds;
+};
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -242,8 +249,11 @@ private slots:
 
 public slots:
     void update_name(QString name, int which_day, int which_class);
+    void update_class_info(QString name, int hours, int minutes, int seconds, int which_day, int which_class);
 private:
     Ui::MainWindow *ui;
     timer* mytimer;
+    QMap<int, ClassInfo> classInfoMap; // Key is hash of date and class index
+
 };
 #endif // MAINWINDOW_H

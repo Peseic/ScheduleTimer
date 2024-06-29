@@ -1,5 +1,6 @@
 #include "add_dll.h"
 #include "ui_add_dll.h"
+#include "window_titles.h"
 #include <QDate>
 Add_dll::Add_dll(QWidget *parent)
     : QDialog(parent)
@@ -7,6 +8,8 @@ Add_dll::Add_dll(QWidget *parent)
 {
     ui->setupUi(this);
     ui->dateEdit->setDate(QDate::currentDate());
+
+    this->setWindowTitle(Q_GLOBAL_STATIC_CLASS(WindowTitles).ADD_DLL_WINDOW_TITLE);
 }
 
 Add_dll::~Add_dll()

@@ -320,6 +320,16 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
+       <widget class="QLabel" name="accelerateLabel">
+        <property name="text">
+         <string>accelerateLabel</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="showTime">
         <property name="font">
          <font>

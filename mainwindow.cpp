@@ -9,6 +9,7 @@
 #include "add_dll.h"
 #include "ui_add_dll.h"
 #include "timer.h"
+#include "window_titles.h"
 
 #include <QApplication>
 #include <QSqlDatabase>
@@ -140,6 +141,8 @@ MainWindow::MainWindow(QWidget *parent)
     ddls.append(ui->ddl_6);
     ddls.append(ui->ddl_7);
     // connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::on_pushButton_2_clicked);
+
+    this->setWindowTitle(Q_GLOBAL_STATIC_CLASS(WindowTitles).MAINWINDOW_WINDOW_TITLE);
 }
 
 MainWindow::~MainWindow()
@@ -337,12 +340,8 @@ void MainWindow::on_pushButton_5_clicked()
 void MainWindow::update_name(QString name, int which_day, int which_class){
     day_class[which_day][which_class - 1]->setText(name);
 }
-void MainWindow::add_class(QString t_date, int w_class, QString prev_n, QString un){
-    set = new set_class(prev_n, this);
-    set->the_date = t_date;
-    set->which_class = w_class;
-    set->username = un;
-    set->prev_name = prev_n;
+void MainWindow::add_class(QString t_date, int w_class, QString prev_n, QString un)
+{
     int rec = 0;
     for(int i = 0; i < 7; i++){
         if(days[i]->text() == t_date){
@@ -350,11 +349,35 @@ void MainWindow::add_class(QString t_date, int w_class, QString prev_n, QString 
             break;
         }
     }
-    set->which_day = rec;
+
+    ClassInfo classInfo;
+    int key = 100 * rec + w_class;
+    if (classInfoMap.contains(key)) {
+        classInfo = classInfoMap[key];
+    } else {
+        classInfo = {prev_n, 0, 0, 0}; // Default values
+    }
+
+    set = new set_class(classInfo.name, classInfo.hours, classInfo.minutes, classInfo.seconds, this);
+    set->the_date = t_date;
+    set->which_class = w_class;
+    set->username = un;
+    set->prev_name = prev_n;
+    set->which_day = rec;   // rec was calculated earlier
     set->set_lineedit();
     set->show();
-    connect(set, &set_class::update_class, this, &MainWindow::update_name);
+    connect(set, &set_class::update_class, this, &MainWindow::update_class_info);
 }
+
+void MainWindow::update_class_info(QString name, int hours, int minutes, int seconds, int which_day, int which_class)
+{
+    qDebug() << "Updated class: " << name << " Duration: " << hours << "h " << minutes << "m " << seconds << "s";
+
+    day_class[which_day][which_class - 1]->setText(name);
+    int key = 100 * which_day + which_class;
+    classInfoMap[key] = {name, hours, minutes, seconds};
+}
+
 
 void MainWindow::on_mon_bt1_clicked()
 {

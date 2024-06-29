@@ -5,6 +5,7 @@
 #include "register_page.h"
 #include "start_use.h"
 #include "register_page.h"
+#include "window_titles.h"
 #include <QApplication>
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -15,6 +16,8 @@ register_page::register_page(QWidget *parent)
     , ui(new Ui::register_page)
 {
     ui->setupUi(this);
+
+    this->setWindowTitle(Q_GLOBAL_STATIC_CLASS(WindowTitles).REGISTER_PAGE_WINDOW_TITLE);
 }
 
 register_page::~register_page()

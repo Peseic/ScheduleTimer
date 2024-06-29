@@ -12,7 +12,7 @@ class set_class : public QDialog
     Q_OBJECT
 
 public:
-    explicit set_class(QString p_name, QWidget *parent = nullptr);
+    explicit set_class(QString p_name, int hours, int minutes, int seconds, QWidget *parent = nullptr);
     ~set_class();
     int which_class;
     QString the_date;
@@ -27,7 +27,7 @@ private slots:
     void on_pushButton_2_clicked();
 
 signals:
-    void update_class(QString name, int which_day, int which_class);
+    void update_class(QString name, int hours, int minutes, int seconds, int which_day, int which_class);
 private:
     Ui::set_class *ui;
 };

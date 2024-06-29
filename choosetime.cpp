@@ -1,5 +1,6 @@
 #include "choosetime.h"
 #include "ui_choosetime.h"
+#include "window_titles.h"
 #include <QDate>
 Choosetime::Choosetime(QWidget *parent)
     : QDialog(parent)
@@ -8,6 +9,8 @@ Choosetime::Choosetime(QWidget *parent)
     ui->setupUi(this);
     ui->dateEdit_start->setDate(QDate::currentDate());
     ui->dateEdit_end->setDate(QDate::currentDate());
+
+    this->setWindowTitle(Q_GLOBAL_STATIC_CLASS(WindowTitles).CHOOSETIME_WINDOW_TITLE);
 }
 
 Choosetime::~Choosetime()

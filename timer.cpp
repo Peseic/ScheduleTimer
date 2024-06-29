@@ -2,6 +2,7 @@
 #include "ui_timer.h"
 #include "timer_popup.h"
 #include "mainwindow.h"
+#include "window_titles.h"
 
 
 QColor default_gray = QColor(240, 240, 240);
@@ -9,10 +10,11 @@ QColor light_red = QColor(255, 182, 193);
 QColor light_green = QColor(144, 238, 144);
 QColor lilac = QColor(237, 200, 255);
 
+bool accelerate = true;
+int ms_in_s = accelerate ? 100 : 1000;
 int color_gradient_time = 1000;         // milliseconds
 int color_gradient_update_time = 30;    // milliseconds
-bool accelerate = true;
-int ms_in_s = accelerate ?
+
 
 timer::timer(MainWindow *parent)
     : QWidget(nullptr) // Ensure the timer window is a top-level window
@@ -35,7 +37,13 @@ timer::timer(MainWindow *parent)
     ui->showTime->setText("00:00:00");
     ui->pauseLabel->setText("");
 
+    if (accelerate) {
+        ui->accelerateLabel->setText("Accelerate mode is on for demonstration purposes.");
+    }
+
     set_customHMS_visibility(false);
+
+    this->setWindowTitle(Q_GLOBAL_STATIC_CLASS(WindowTitles).TIMER_WINDOW_TITLE);
 }
 
 timer::~timer()
@@ -137,7 +145,7 @@ void timer::on_timer_start_bt_clicked()
             ui->showTime->setText(time.toString("hh:mm:ss"));
         }
     }
-    tomato_timer.start(1000);
+    tomato_timer.start(ms_in_s);
     ui->pauseLabel->setText("");
 }
 

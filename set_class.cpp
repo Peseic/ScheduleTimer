@@ -6,12 +6,13 @@
 #include "register_page.h"
 #include "set_class.h"
 #include "ui_set_class.h"
+#include "window_titles.h"
 #include <QApplication>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QMessageBox>
-set_class::set_class(QString p_name,QWidget *parent)
+set_class::set_class(QString p_name, int hours, int minutes, int seconds, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::set_class), prev_name(p_name)
 {
@@ -19,6 +20,13 @@ set_class::set_class(QString p_name,QWidget *parent)
     ui->setupUi(this);
     ui->lineEdit->setText(prev_name);
 
+    ui->setclass_Spinbox_h->setValue(hours);
+    ui->setclass_Spinbox_m->setValue(minutes);
+    ui->setclass_Spinbox_s->setValue(seconds);
+
+    connect(ui->pushButton, &QPushButton::clicked, this, &set_class::on_pushButton_clicked);
+
+    this->setWindowTitle(Q_GLOBAL_STATIC_CLASS(WindowTitles).SET_CLASS_WINDOW_TITLE);
 }
 
 set_class::~set_class()
@@ -47,7 +55,13 @@ void set_class::on_pushButton_clicked()
     if (!query.exec()) {
         // 处理错误
     }
-    emit update_class(ui->lineEdit->text(), which_day, which_class);
+
+    QString name = ui->lineEdit->text();
+    int hours = ui->setclass_Spinbox_h->value();
+    int minutes = ui->setclass_Spinbox_m->value();
+    int seconds = ui->setclass_Spinbox_s->value();
+    emit update_class(name, hours, minutes, seconds, which_day, which_class);
+    // emit update_class(ui->lineEdit->text(), which_day, which_class);
     delete this;
 }
 

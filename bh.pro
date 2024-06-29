@@ -29,7 +29,8 @@ HEADERS += \
     set_class.h \
     start_use.h \
     timer.h \
-    timer_popup.h
+    timer_popup.h \
+    window_titles.h
 
 FORMS += \
     add_dll.ui \
