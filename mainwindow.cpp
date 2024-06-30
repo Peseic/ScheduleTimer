@@ -10,6 +10,7 @@
 #include "ui_add_dll.h"
 #include "timer.h"
 #include "window_titles.h"
+#include "buttonstyles.h"
 
 #include <QApplication>
 #include <QSqlDatabase>
@@ -21,6 +22,34 @@
 #include <choosetime.h>
 #include <ui_choosetime.h>
 #include <QListWidget>
+
+QColor buttonColors[10] = {
+    QColor(0xEAE4E9),
+    QColor(0xFFF1E6),
+    QColor(0xFDE2E4),
+    QColor(0xFAD2E1),
+    QColor(0xE2ECE9),
+    QColor(0xBEE1E6),
+    QColor(0xF0EFEB),
+    QColor(0xDFE7FD),
+    QColor(0xCDDAFD),
+    QColor(0xE9EDC9),
+/*
+    QColor("#EAE4E9"),
+    QColor("#FFF1E6"),
+    QColor("#FDE2E4"),
+    QColor("#FAD2E1"),
+    QColor("#E2ECE9"),
+    QColor("#BEE1E6"),
+    QColor("#F0EFEB"),
+    QColor("#DFE7FD"),
+    QColor("#CDDAFD"),
+    QColor("#E9EDC9"),
+*/
+};
+std::map<QString, int> classNameToColorIndex;
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -364,6 +393,8 @@ void MainWindow::update_name(QString name, int which_day, int which_class){
 }
 void MainWindow::add_class(QString t_date, int w_class, QString prev_n, QString un)
 {
+    qDebug("add_class was called with params: ");
+    qDebug() << t_date << ' ' << w_class << ' ' << prev_n << ' ' << un;
     int rec = 0;
     for(int i = 0; i < 7; i++){
         if(days[i]->text() == t_date){
@@ -410,38 +441,30 @@ void MainWindow::update_class_info(QString name, int hours, int minutes, int sec
 
 void MainWindow::updateButtonStyleIfNeeded(int which_day, int which_class)
 {
-    // Reset to default style if class is cleared
-    if (day_class[which_day][which_class]->text().trimmed().isEmpty()) {    // CRUCIAL! removes whitespace.
+    // First, the class name also comes into play.
+    QString className = day_class[which_day][which_class]->text().trimmed();    // CRUCIAL! removes whitespace.
+
+    // CASE 1: Reset to default style if class is cleared
+    if (className.isEmpty()) {
         day_class[which_day][which_class]->setStyleSheet("");
+        return;
     }
-    // Update button style if class name is not null
-    else {
 
-        qDebug("class name is not empty. It is: ");
-        qDebug() << day_class[which_day][which_class]->text();
-        qDebug("class name is not empty. Trimmed text is: ");
-        qDebug() << day_class[which_day][which_class]->text().trimmed();
+    // CASE 2: Update button style if class name is not null
 
-        day_class[which_day][which_class]->setStyleSheet(
-            "QPushButton {"
-            "   background-color: #FDE2E4; "
-            "   color: #FFFFFF; "
-            "   border: 1px solid #FF6347; "
-            "   border-radius: 5px; "
-            "   padding: 5px; "
-            "   font: bold 14px;"
-            "   font-family: 'Arial', '华文中宋'; "
-            "}"
-            "QPushButton:hover { "
-            "   background-color: #FF6347; "
-            "   color: #000000; "
-            "}"
-            "QPushButton:pressed { "
-            "   background-color: #FF4500; "
-            "   color: #FFFFFF; "
-            "}"
-        );
+    // get the color index
+    if (classNameToColorIndex.find(className) == classNameToColorIndex.end()) {
+        int newIndex = classNameToColorIndex.size();
+        classNameToColorIndex[className] = newIndex;
     }
+    int colorIndex = classNameToColorIndex[className] % (sizeof(buttonColors) / sizeof(buttonColors[0])); // wrap around
+
+    // get the QSS
+    QColor bgColor = buttonColors[colorIndex];
+    QString qss = generateButtonQSS(bgColor);
+
+    // use the QSS
+    day_class[which_day][which_class]->setStyleSheet(qss);
 }
 
 
@@ -519,433 +542,433 @@ void MainWindow::on_mon_bt12_clicked()
 
 void MainWindow::on_tue_bt1_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 1, mon_class[0]->text(),username);
+    MainWindow::add_class(days[1]->text(), 1, tue_class[0]->text(),username);
 }
 
 
 void MainWindow::on_tue_bt2_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 2, mon_class[1]->text(),username);
+    MainWindow::add_class(days[1]->text(), 2, tue_class[1]->text(),username);
 }
 
 
 void MainWindow::on_tue_bt3_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 3, mon_class[2]->text(),username);
+    MainWindow::add_class(days[1]->text(), 3, tue_class[2]->text(),username);
 }
 
 
 void MainWindow::on_tue_bt4_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 4, mon_class[3]->text(),username);
+    MainWindow::add_class(days[1]->text(), 4, tue_class[3]->text(),username);
 }
 
 
 void MainWindow::on_tue_bt5_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 5, mon_class[4]->text(),username);
+    MainWindow::add_class(days[1]->text(), 5, tue_class[4]->text(),username);
 }
 
 
 void MainWindow::on_tue_bt6_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 6, mon_class[5]->text(),username);
+    MainWindow::add_class(days[1]->text(), 6, tue_class[5]->text(),username);
 }
 
 
 void MainWindow::on_tue_bt7_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 7, mon_class[6]->text(),username);
+    MainWindow::add_class(days[1]->text(), 7, tue_class[6]->text(),username);
 }
 
 
 void MainWindow::on_tue_bt8_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 8, mon_class[7]->text(),username);
+    MainWindow::add_class(days[1]->text(), 8, tue_class[7]->text(),username);
 }
 
 
 void MainWindow::on_tue_bt9_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 9, mon_class[8]->text(),username);
+    MainWindow::add_class(days[1]->text(), 9, tue_class[8]->text(),username);
 }
 
 
 void MainWindow::on_tue_bt10_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 10, mon_class[9]->text(),username);
+    MainWindow::add_class(days[1]->text(), 10, tue_class[9]->text(),username);
 }
 
 
 void MainWindow::on_tue_bt11_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 11, mon_class[10]->text(),username);
+    MainWindow::add_class(days[1]->text(), 11, tue_class[10]->text(),username);
 }
 
 
 void MainWindow::on_tue_bt12_clicked()
 {
-    MainWindow::add_class(days[1]->text(), 12, mon_class[11]->text(),username);
+    MainWindow::add_class(days[1]->text(), 12, tue_class[11]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt1_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 1, mon_class[0]->text(),username);
+    MainWindow::add_class(days[2]->text(), 1, wedn_class[0]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt2_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 2, mon_class[1]->text(),username);
+    MainWindow::add_class(days[2]->text(), 2, wedn_class[1]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt3_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 3, mon_class[2]->text(),username);
+    MainWindow::add_class(days[2]->text(), 3, wedn_class[2]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt4_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 4, mon_class[3]->text(),username);
+    MainWindow::add_class(days[2]->text(), 4, wedn_class[3]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt5_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 5, mon_class[4]->text(),username);
+    MainWindow::add_class(days[2]->text(), 5, wedn_class[4]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt6_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 6, mon_class[5]->text(),username);
+    MainWindow::add_class(days[2]->text(), 6, wedn_class[5]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt7_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 7, mon_class[6]->text(),username);
+    MainWindow::add_class(days[2]->text(), 7, wedn_class[6]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt8_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 8, mon_class[7]->text(),username);
+    MainWindow::add_class(days[2]->text(), 8, wedn_class[7]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt9_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 9, mon_class[8]->text(),username);
+    MainWindow::add_class(days[2]->text(), 9, wedn_class[8]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt10_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 10, mon_class[9]->text(),username);
+    MainWindow::add_class(days[2]->text(), 10, wedn_class[9]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt11_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 11, mon_class[10]->text(),username);
+    MainWindow::add_class(days[2]->text(), 11, wedn_class[10]->text(),username);
 }
 
 
 void MainWindow::on_wedn_bt12_clicked()
 {
-    MainWindow::add_class(days[2]->text(), 12, mon_class[11]->text(),username);
+    MainWindow::add_class(days[2]->text(), 12, wedn_class[11]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt1_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 1, mon_class[0]->text(),username);
+    MainWindow::add_class(days[3]->text(), 1, thur_class[0]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt2_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 2, mon_class[1]->text(),username);
+    MainWindow::add_class(days[3]->text(), 2, thur_class[1]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt3_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 3, mon_class[2]->text(),username);
+    MainWindow::add_class(days[3]->text(), 3, thur_class[2]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt4_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 4, mon_class[3]->text(),username);
+    MainWindow::add_class(days[3]->text(), 4, thur_class[3]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt5_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 5, mon_class[4]->text(),username);
+    MainWindow::add_class(days[3]->text(), 5, thur_class[4]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt6_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 6, mon_class[5]->text(),username);
+    MainWindow::add_class(days[3]->text(), 6, thur_class[5]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt7_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 7, mon_class[6]->text(),username);
+    MainWindow::add_class(days[3]->text(), 7, thur_class[6]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt8_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 8, mon_class[7]->text(),username);
+    MainWindow::add_class(days[3]->text(), 8, thur_class[7]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt9_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 9, mon_class[8]->text(),username);
+    MainWindow::add_class(days[3]->text(), 9, thur_class[8]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt10_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 10, mon_class[9]->text(),username);
+    MainWindow::add_class(days[3]->text(), 10, thur_class[9]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt11_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 11, mon_class[10]->text(),username);
+    MainWindow::add_class(days[3]->text(), 11, thur_class[10]->text(),username);
 }
 
 
 void MainWindow::on_thur_bt12_clicked()
 {
-    MainWindow::add_class(days[3]->text(), 12, mon_class[11]->text(),username);
+    MainWindow::add_class(days[3]->text(), 12, thur_class[11]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt1_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 1, mon_class[0]->text(),username);
+    MainWindow::add_class(days[4]->text(), 1, fri_class[0]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt2_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 2, mon_class[1]->text(),username);
+    MainWindow::add_class(days[4]->text(), 2, fri_class[1]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt3_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 3, mon_class[2]->text(),username);
+    MainWindow::add_class(days[4]->text(), 3, fri_class[2]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt4_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 4, mon_class[3]->text(),username);
+    MainWindow::add_class(days[4]->text(), 4, fri_class[3]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt5_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 5, mon_class[4]->text(),username);
+    MainWindow::add_class(days[4]->text(), 5, fri_class[4]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt6_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 6, mon_class[5]->text(),username);
+    MainWindow::add_class(days[4]->text(), 6, fri_class[5]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt7_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 7, mon_class[6]->text(),username);
+    MainWindow::add_class(days[4]->text(), 7, fri_class[6]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt8_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 8, mon_class[7]->text(),username);
+    MainWindow::add_class(days[4]->text(), 8, fri_class[7]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt9_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 9, mon_class[8]->text(),username);
+    MainWindow::add_class(days[4]->text(), 9, fri_class[8]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt10_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 10, mon_class[9]->text(),username);
+    MainWindow::add_class(days[4]->text(), 10, fri_class[9]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt11_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 11, mon_class[10]->text(),username);
+    MainWindow::add_class(days[4]->text(), 11, fri_class[10]->text(),username);
 }
 
 
 void MainWindow::on_fri_bt12_clicked()
 {
-    MainWindow::add_class(days[4]->text(), 12, mon_class[11]->text(),username);
+    MainWindow::add_class(days[4]->text(), 12, fri_class[11]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt1_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 1, mon_class[0]->text(),username);
+    MainWindow::add_class(days[5]->text(), 1, sat_class[0]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt2_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 2, mon_class[1]->text(),username);
+    MainWindow::add_class(days[5]->text(), 2, sat_class[1]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt3_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 3, mon_class[2]->text(),username);
+    MainWindow::add_class(days[5]->text(), 3, sat_class[2]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt4_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 4, mon_class[3]->text(),username);
+    MainWindow::add_class(days[5]->text(), 4, sat_class[3]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt5_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 5, mon_class[4]->text(),username);
+    MainWindow::add_class(days[5]->text(), 5, sat_class[4]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt6_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 6, mon_class[5]->text(),username);
+    MainWindow::add_class(days[5]->text(), 6, sat_class[5]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt7_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 7, mon_class[6]->text(),username);
+    MainWindow::add_class(days[5]->text(), 7, sat_class[6]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt8_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 8, mon_class[7]->text(),username);
+    MainWindow::add_class(days[5]->text(), 8, sat_class[7]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt9_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 9, mon_class[8]->text(),username);
+    MainWindow::add_class(days[5]->text(), 9, sat_class[8]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt10_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 10, mon_class[9]->text(),username);
+    MainWindow::add_class(days[5]->text(), 10, sat_class[9]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt11_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 11, mon_class[10]->text(),username);
+    MainWindow::add_class(days[5]->text(), 11, sat_class[10]->text(),username);
 }
 
 
 void MainWindow::on_sat_bt12_clicked()
 {
-    MainWindow::add_class(days[5]->text(), 12, mon_class[11]->text(),username);
+    MainWindow::add_class(days[5]->text(), 12, sat_class[11]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt1_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 1, mon_class[0]->text(),username);
+    MainWindow::add_class(days[6]->text(), 1, sun_class[0]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt2_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 2, mon_class[1]->text(),username);
+    MainWindow::add_class(days[6]->text(), 2, sun_class[1]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt3_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 3, mon_class[2]->text(),username);
+    MainWindow::add_class(days[6]->text(), 3, sun_class[2]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt4_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 4, mon_class[3]->text(),username);
+    MainWindow::add_class(days[6]->text(), 4, sun_class[3]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt5_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 5, mon_class[4]->text(),username);
+    MainWindow::add_class(days[6]->text(), 5, sun_class[4]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt6_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 6, mon_class[5]->text(),username);
+    MainWindow::add_class(days[6]->text(), 6, sun_class[5]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt7_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 7, mon_class[6]->text(),username);
+    MainWindow::add_class(days[6]->text(), 7, sun_class[6]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt8_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 8, mon_class[7]->text(),username);
+    MainWindow::add_class(days[6]->text(), 8, sun_class[7]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt9_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 9, mon_class[8]->text(),username);
+    MainWindow::add_class(days[6]->text(), 9, sun_class[8]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt10_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 10, mon_class[9]->text(),username);
+    MainWindow::add_class(days[6]->text(), 10, sun_class[9]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt11_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 11, mon_class[10]->text(),username);
+    MainWindow::add_class(days[6]->text(), 11, sun_class[10]->text(),username);
 }
 
 
 void MainWindow::on_sun_bt12_clicked()
 {
-    MainWindow::add_class(days[6]->text(), 12, mon_class[11]->text(),username);
+    MainWindow::add_class(days[6]->text(), 12, sun_class[11]->text(),username);
 }
 
 void MainWindow::on_expand_button_clicked()

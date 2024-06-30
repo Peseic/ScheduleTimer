@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     add_dll.cpp \
+    buttonstyles.cpp \
     choosetime.cpp \
     log_page.cpp \
     main.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     add_dll.h \
+    buttonstyles.h \
     choosetime.h \
     log_page.h \
     mainwindow.h \

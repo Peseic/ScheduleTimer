@@ -33,6 +33,8 @@ public:
     void create_ddl_table();
     bool is_exsit_ddl_table();
     void update_ddl();
+    void applyButtonStyles();   // colorful buttons
+
     QString username;
     QList<QLabel*>days;
     QList<QPushButton*>mon_class;
