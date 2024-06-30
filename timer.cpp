@@ -42,7 +42,7 @@ timer::timer(MainWindow *parent)
     on_timer_reset_bt_clicked();    // display current time at init
 
     if (accelerate) {
-        ui->accelerateLabel->setText("Accelerate mode is on for demonstration purposes.");
+        ui->accelerateLabel->setText("Note: Accelerate mode is on for demonstration purposes.");
     }
 
     set_customHMS_visibility(false);

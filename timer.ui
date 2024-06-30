@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1016</width>
-    <height>595</height>
+    <width>788</width>
+    <height>446</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="exit_button">
    <property name="geometry">
     <rect>
-     <x>915</x>
+     <x>687</x>
      <y>0</y>
      <width>101</width>
      <height>41</height>
@@ -135,10 +135,10 @@
   <widget class="QWidget" name="verticalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>80</y>
-     <width>761</width>
-     <height>481</height>
+     <x>70</x>
+     <y>60</y>
+     <width>631</width>
+     <height>361</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -316,6 +316,22 @@ QPushButton:pressed {
      </layout>
     </item>
     <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Preferred</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>50</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="custom_HMS">
       <item>
        <spacer name="horizontalSpacer_5">
@@ -421,25 +437,14 @@ QPushButton:pressed {
      </layout>
     </item>
     <item>
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Preferred</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>50</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QLabel" name="accelerateLabel">
+        <property name="font">
+         <font>
+          <family>Consolas</family>
+         </font>
+        </property>
         <property name="text">
          <string>accelerateLabel</string>
         </property>
@@ -524,10 +529,10 @@ QPushButton:pressed {
     border: none;
     color: #ECEFF4;
     background-color: #2E3440;
-    font: 500 12pt &quot;SimHei&quot;;
+    font: 500 11pt &quot;SimHei&quot;;
     border-radius: 6px;
-    width: 93px;  
-    height: 28px;  
+    width: 83px;  
+    height: 24px;  
 }
 
 QPushButton:hover {
@@ -550,10 +555,10 @@ QPushButton:pressed {
     border: none;
     color: #ECEFF4;
     background-color: #2E3440;
-    font: 500 12pt &quot;SimHei&quot;;
+    font: 500 11pt &quot;SimHei&quot;;
     border-radius: 6px;
-    width: 93px;  
-    height: 28px;  
+    width: 83px;  
+    height: 24px;  
 }
 
 QPushButton:hover {
@@ -576,10 +581,10 @@ QPushButton:pressed {
     border: none;
     color: #ECEFF4;
     background-color: #2E3440;
-    font: 500 12pt &quot;SimHei&quot;;
+    font: 500 11pt &quot;SimHei&quot;;
     border-radius: 6px;
-    width: 93px;  
-    height: 28px;  
+    width: 83px;  
+    height: 24px;  
 }
 
 QPushButton:hover {
