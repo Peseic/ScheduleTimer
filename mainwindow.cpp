@@ -268,6 +268,7 @@ void MainWindow::on_go2date_clicked()
             for(int k = 0; k < 12; k++){
                 QString classn = QString("class%1").arg(k + 1);
                 day_class[i][k]->setText(query.value(classn).toString());
+                updateButtonStyleIfNeeded(i, k);    // update button style for LOADED classes
             }
         }
         else{  // 不存在这个日期
@@ -351,10 +352,13 @@ void MainWindow::expand_class(const QDate start,const QDate end){
         p_date = p_date.addDays(1);
     }
 }
+
+// make the compiler happy
 void MainWindow::on_pushButton_5_clicked()
 {
 
 }
+
 void MainWindow::update_name(QString name, int which_day, int which_class){
     day_class[which_day][which_class - 1]->setText(name);
 }
@@ -372,8 +376,12 @@ void MainWindow::add_class(QString t_date, int w_class, QString prev_n, QString 
     int key = 100 * rec + w_class;
     if (classInfoMap.contains(key)) {
         classInfo = classInfoMap[key];
+        qDebug("Found class key; class name is: ");
+        qDebug() << classInfo.name;
     } else {
         classInfo = {prev_n, 0, 0, 0}; // Default values
+        qDebug("Not Found class key; class name is: ");
+        qDebug() << prev_n;
     }
 
     set = new set_class(classInfo.name, classInfo.hours, classInfo.minutes, classInfo.seconds, this);
@@ -382,7 +390,7 @@ void MainWindow::add_class(QString t_date, int w_class, QString prev_n, QString 
     set->username = un;
     set->prev_name = prev_n;
     set->which_day = rec;   // rec was calculated earlier
-    set->set_lineedit();
+    // set->set_lineedit(); // don't know why this line appears here, should never be called without param.
     set->show();
     connect(set, &set_class::update_class, this, &MainWindow::update_class_info);
 }
@@ -392,8 +400,48 @@ void MainWindow::update_class_info(QString name, int hours, int minutes, int sec
     qDebug() << "Updated class: " << name << " Duration: " << hours << "h " << minutes << "m " << seconds << "s";
 
     day_class[which_day][which_class - 1]->setText(name);
+
+    // Update button style if class name is not null
+    updateButtonStyleIfNeeded(which_day, which_class - 1);
+
     int key = 100 * which_day + which_class;
     classInfoMap[key] = {name, hours, minutes, seconds};
+}
+
+void MainWindow::updateButtonStyleIfNeeded(int which_day, int which_class)
+{
+    // Reset to default style if class is cleared
+    if (day_class[which_day][which_class]->text().trimmed().isEmpty()) {    // CRUCIAL! removes whitespace.
+        day_class[which_day][which_class]->setStyleSheet("");
+    }
+    // Update button style if class name is not null
+    else {
+
+        qDebug("class name is not empty. It is: ");
+        qDebug() << day_class[which_day][which_class]->text();
+        qDebug("class name is not empty. Trimmed text is: ");
+        qDebug() << day_class[which_day][which_class]->text().trimmed();
+
+        day_class[which_day][which_class]->setStyleSheet(
+            "QPushButton {"
+            "   background-color: #FDE2E4; "
+            "   color: #FFFFFF; "
+            "   border: 1px solid #FF6347; "
+            "   border-radius: 5px; "
+            "   padding: 5px; "
+            "   font: bold 14px;"
+            "   font-family: 'Arial', '华文中宋'; "
+            "}"
+            "QPushButton:hover { "
+            "   background-color: #FF6347; "
+            "   color: #000000; "
+            "}"
+            "QPushButton:pressed { "
+            "   background-color: #FF4500; "
+            "   color: #FFFFFF; "
+            "}"
+        );
+    }
 }
 
 
@@ -907,12 +955,11 @@ void MainWindow::on_expand_button_clicked()
     ctim->show();
 }
 
-
+// make the compiler happy
 void MainWindow::on_pushButton_4_clicked()
 {
     delete this;
 }
-
 
 
 

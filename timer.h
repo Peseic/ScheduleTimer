@@ -40,9 +40,13 @@ private slots:
     void on_timer_reset_bt_clicked();
 
 
+    void on_exit_button_clicked();
+
 private:
     Ui::timer *ui;
     MainWindow *mainWindow;
+    QTimer *currentTimeTimer; // QTimer for updating current time
+    QString currentTimeTimerState; // prevent thrashing
 
     QTimer tomato_timer;
     QTime time;

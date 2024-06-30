@@ -169,12 +169,21 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {
-	border: none;
-	color: #ECEFF4;
-	background-color: #2E3440;
-	font: 500 10pt &quot;SimHei&quot;;
-	border-radius: 6px;
-}</string>
+    border: none;
+    color: #ECEFF4;
+    background-color: #2E3440;
+    font: 500 10pt &quot;SimHei&quot;;
+    border-radius: 6px;
+}
+
+QPushButton:hover {
+    background-color: #3B4252;
+}
+
+QPushButton:pressed {
+    background-color: #434C5E;
+}
+</string>
    </property>
    <property name="text">
     <string>注册</string>
@@ -194,12 +203,21 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {
-	border: none;
-	color: #ECEFF4;
-	background-color: #2E3440;
-	font: 500 10pt &quot;SimHei&quot;;
-	border-radius: 6px;
-}</string>
+    border: none;
+    color: #ECEFF4;
+    background-color: #2E3440;
+    font: 500 10pt &quot;SimHei&quot;;
+    border-radius: 6px;
+}
+
+QPushButton:hover {
+    background-color: #3B4252;
+}
+
+QPushButton:pressed {
+    background-color: #434C5E;
+}
+</string>
    </property>
    <property name="text">
     <string>登录</string>

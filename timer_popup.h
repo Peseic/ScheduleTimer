@@ -15,6 +15,11 @@ public:
     explicit timer_popup(QWidget *parent = nullptr, QString mode = "none");
     ~timer_popup();
 
+signals:
+    void tomatoToRest();
+    void restToTomato();
+    void normalEnd();
+
 private slots:
     void on_pushButton_clicked();
 

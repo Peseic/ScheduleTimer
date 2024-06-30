@@ -250,6 +250,7 @@ private slots:
 public slots:
     void update_name(QString name, int which_day, int which_class);
     void update_class_info(QString name, int hours, int minutes, int seconds, int which_day, int which_class);
+    void updateButtonStyleIfNeeded(int which_day, int which_class); // update button style if class added
 private:
     Ui::MainWindow *ui;
     timer* mytimer;

@@ -19,7 +19,7 @@
      <x>70</x>
      <y>50</y>
      <width>160</width>
-     <height>88</height>
+     <height>90</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -44,6 +44,7 @@
       <property name="font">
        <font>
         <family>华文中宋</family>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="text">
@@ -58,14 +59,23 @@
      <widget class="QPushButton" name="pushButton">
       <property name="styleSheet">
        <string notr="true">QPushButton {
-	border: none;
-	color: #ECEFF4;
-	background-color: #2E3440;
-	font: 500 10pt &quot;SimHei&quot;;
-	border-radius: 6px;
-	width: 158px;  
+    border: none;
+    color: #ECEFF4;
+    background-color: #2E3440;
+    font: 500 10pt &quot;SimHei&quot;;
+    border-radius: 6px;
+    width: 158px;  
     height: 28px;  
-}</string>
+}
+
+QPushButton:hover {
+    background-color: #3B4252;
+}
+
+QPushButton:pressed {
+    background-color: #434C5E;
+}
+</string>
       </property>
       <property name="text">
        <string>确定</string>

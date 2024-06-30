@@ -131,12 +131,21 @@ color: #4C566A;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {
-	border: none;
-	color: #2E3440;
-	background-color: #88C0D0;
-	font: 500 10pt &quot;SimHei&quot;;
-	border-radius: 6px;
-}</string>
+    border: none;
+    color: #2E3440;
+    background-color: #88C0D0;
+    font: 500 10pt &quot;SimHei&quot;;
+    border-radius: 6px;
+}
+
+QPushButton:hover {
+    background-color: #8FCEDE;
+}
+
+QPushButton:pressed {
+    background-color: #97DCEB;
+}
+</string>
    </property>
    <property name="text">
     <string>完成</string>

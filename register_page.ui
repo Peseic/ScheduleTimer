@@ -77,12 +77,21 @@
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {   /* confirm login */
-	border: none;
-	color: #2E3440;
-	background-color: #8FBCBB;
-	font: 500 10pt &quot;SimHei&quot;;
-	border-radius: 6px;
-}</string>
+    border: none;
+    color: #2E3440;
+    background-color: #8FBCBB;
+    font: 500 10pt &quot;SimHei&quot;;
+    border-radius: 6px;
+}
+
+QPushButton:hover {
+    background-color: #97C8C7;
+}
+
+QPushButton:pressed {
+    background-color: #9FD4D3;
+}
+</string>
    </property>
    <property name="text">
     <string>完成</string>

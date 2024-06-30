@@ -16,9 +16,17 @@ set_class::set_class(QString p_name, int hours, int minutes, int seconds, QWidge
     : QDialog(parent)
     , ui(new Ui::set_class), prev_name(p_name)
 {
+    qDebug("set_class was called with the following p_name: ");
+    qDebug() << p_name;
 
     ui->setupUi(this);
-    ui->lineEdit->setText(prev_name);
+    ui->lineEdit->setText(prev_name.trimmed());
+    ui->lineEdit->update();
+
+    qDebug("set_class textbox was init'ed with the following prev_name: ");
+    qDebug() << prev_name;
+    qDebug("set_class textbox live value: ");
+    qDebug() << ui->lineEdit->text();
 
     ui->setclass_Spinbox_h->setValue(hours);
     ui->setclass_Spinbox_m->setValue(minutes);
@@ -34,6 +42,8 @@ set_class::~set_class()
     delete ui;
 }
 void set_class::set_lineedit(){
+    qDebug("set_lineedit (I don't know why this function exists) was called. The param is: ");
+    qDebug() << prev_name;
     ui->lineEdit->setText(prev_name);
 }
 void set_class::on_pushButton_clicked()

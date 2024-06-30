@@ -11,10 +11,12 @@ QColor light_green = QColor(144, 238, 144);
 QColor lilac = QColor(237, 200, 255);
 
 bool accelerate = true;
-int ms_in_s = accelerate ? 100 : 1000;
+int ms_in_s = accelerate ? 50 : 1000;
 int color_gradient_time = 1000;         // milliseconds
 int color_gradient_update_time = 30;    // milliseconds
 
+// DBG macros
+bool colorDBG = false;
 
 timer::timer(MainWindow *parent)
     : QWidget(nullptr) // Ensure the timer window is a top-level window
@@ -24,18 +26,20 @@ timer::timer(MainWindow *parent)
     , colorTimer(new QTimer(this))
     , duration(0)
     , elapsed(0)
+    , currentTimeTimer(new QTimer(this))
+    , currentTimeTimerState("active")
 {
     ui->setupUi(this);
     connect(&tomato_timer, SIGNAL(timeout()), this, SLOT(timeout_slot()));
     connect(colorTimer, SIGNAL(timeout()), this, SLOT(updateBackgroundColor()));
 
-    QTimer *currentTimeTimer = new QTimer(this);
-    // connect(currentTimeTimer, SIGNAL(timeout()), this, SLOT(updateCurrentTime()));
-    currentTimeTimer->start(1000); // Start the timer
+    connect(currentTimeTimer, &QTimer::timeout, this, &timer::updateCurrentTime);
 
     time.setHMS(0, 0, 0, 0);
-    ui->showTime->setText("00:00:00");
-    ui->pauseLabel->setText("");
+    // ui->showTime->setText("00:00:00");
+    // ui->pauseLabel->setText("");
+
+    on_timer_reset_bt_clicked();    // display current time at init
 
     if (accelerate) {
         ui->accelerateLabel->setText("Accelerate mode is on for demonstration purposes.");
@@ -49,10 +53,13 @@ timer::timer(MainWindow *parent)
 timer::~timer()
 {
     delete ui;
+    delete currentTimeTimer;
 }
 
 void timer::on_pushButton_clicked()
 {
+    currentTimeTimerState = "inactive"; // should be inactive most of the time
+
     this->hide();
     if (mainWindow) {
         mainWindow->show();
@@ -71,10 +78,13 @@ void timer::timeout_slot()
         tomato_timer.stop();
         setBackgroundColor(default_gray, color_gradient_time);
         timer_popup *popup = new timer_popup(this, mode);
+        connect(popup, &timer_popup::tomatoToRest, this, &timer::on_timer_rest_bt_clicked);       // auto mode switch
+        connect(popup, &timer_popup::restToTomato, this, &timer::on_timer_tomato_bt_clicked);     // auto mode switch
+        connect(popup, &timer_popup::normalEnd, this, &timer::on_timer_reset_bt_clicked);         // auto back to display current time
         popup->exec();
 
-        time.setHMS(0, 0, 0, 0);
-        updateCurrentTime();
+        // time.setHMS(0, 0, 0, 0);
+        // updateCurrentTime();
         ui->pauseLabel->setText("");
     }
 
@@ -89,6 +99,9 @@ void timer::timeout_slot()
 
 void timer::on_timer_tomato_bt_clicked()
 {
+    currentTimeTimerState = "inactive"; // should be inactive most of the time
+
+    qDebug("tomato button called");
     mode = "tomato";
     tomato_timer.stop();
     ui->pauseLabel->setText("");
@@ -97,11 +110,18 @@ void timer::on_timer_tomato_bt_clicked()
     time.setHMS(0, 25, 0, 0);
     ui->showTime->setText("25:00");
 
+    ui->showTime->update();
+
     setBackgroundColor(light_red, color_gradient_time);
+
+    qDebug() << "Time set to:" << time.toString("mm:ss");
 }
 
 void timer::on_timer_rest_bt_clicked()
 {
+    currentTimeTimerState = "inactive"; // should be inactive most of the time
+
+    qDebug("rest button called");
     mode = "rest";
     tomato_timer.stop();
     ui->pauseLabel->setText("");
@@ -115,6 +135,8 @@ void timer::on_timer_rest_bt_clicked()
 
 void timer::on_timer_custom_bt_clicked()
 {
+    currentTimeTimerState = "inactive"; // should be inactive most of the time
+
     mode = "custom";
     tomato_timer.stop();
     ui->pauseLabel->setText("");
@@ -132,6 +154,8 @@ void timer::on_timer_custom_bt_clicked()
 
 void timer::on_timer_start_bt_clicked()
 {
+    currentTimeTimerState = "inactive"; // should be inactive most of the time
+
     if (ui->spinBox_h->isVisible()) {   // is in custom mode
         int hours = ui->spinBox_h->value();
         int minutes = ui->spinBox_m->value();
@@ -152,6 +176,8 @@ void timer::on_timer_start_bt_clicked()
 
 void timer::on_timer_stop_bt_clicked()
 {
+    currentTimeTimerState = "inactive"; // should be inactive most of the time
+
     tomato_timer.stop();
     ui->pauseLabel->setText("PAUSED");
 }
@@ -159,18 +185,27 @@ void timer::on_timer_stop_bt_clicked()
 
 void timer::on_timer_reset_bt_clicked()
 {
+    currentTimeTimerState = "active";
+
     tomato_timer.stop();
     ui->pauseLabel->setText("");
-    time.setHMS(0, 0, 0, 0);
-    ui->showTime->setText("00:00:00");
+
+    if (currentTimeTimerState == "active") {    // when idle, display current time
+        currentTimeTimer->start(1000); // upd every 1000 ms = 1 second
+        updateCurrentTime();
+    }
+
     setBackgroundColor(default_gray, color_gradient_time);
 }
 
 void timer::updateCurrentTime()
 {
-    QTime currentTime = QTime::currentTime();
-    ui->showTime->setText(currentTime.toString("hh:mm:ss"));
-    qDebug("show current time");
+    if (currentTimeTimerState == "active") {
+        qDebug("updateCurrentTime called");
+        QTime currentTime = QTime::currentTime();
+        ui->showTime->setText(currentTime.toString("hh:mm:ss"));
+        ui->showTime->update();
+    }
 }
 
 void timer::set_customHMS_visibility(bool visibility)
@@ -204,11 +239,11 @@ void timer::setBackgroundColor(const QColor &color, int millisecs)
 
 void timer::updateBackgroundColor()
 {
-    qDebug("update background called");
+    if (colorDBG) qDebug("update background called");
     elapsed += color_gradient_update_time;
     if (elapsed >= duration) {
         colorTimer->stop();
-        qDebug("Color Timer stopped");
+        if (colorDBG) qDebug("Color Timer stopped");
         QString styleSheet = QString("background-color: %1;").arg(endColor.name());
         this->setStyleSheet(styleSheet);
         return;
@@ -220,14 +255,17 @@ void timer::updateBackgroundColor()
     int g = startColor.green() + t * (endColor.green() - startColor.green());
     int b = startColor.blue() + t * (endColor.blue() - startColor.blue());
     QColor currentColor(r, g, b);
-    qDebug() << "Current color: " << currentColor.name();
+    if (colorDBG) qDebug() << "Current color: " << currentColor.name();
 
     // set new background color
     QString styleSheet = QString("background-color: %1;").arg(currentColor.name());
     this->setStyleSheet(styleSheet);
-    qDebug("Set current color. ");
+    if (colorDBG) qDebug("Set current color. ");
 }
 
 
-
+void timer::on_exit_button_clicked()
+{
+    delete this;
+}
 

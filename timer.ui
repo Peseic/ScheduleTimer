@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="exit_button">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>915</x>
      <y>0</y>
      <width>101</width>
      <height>41</height>
@@ -152,6 +152,9 @@
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
+        </property>
         <property name="sizeHint" stdset="0">
          <size>
           <width>40</width>
@@ -164,8 +167,30 @@
        <widget class="QPushButton" name="timer_tomato_bt">
         <property name="font">
          <font>
+          <family>华文中宋</family>
           <pointsize>16</pointsize>
+          <italic>false</italic>
+          <fontweight>Medium</fontweight>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {  
+    background-color: #e55940; 
+    color: #ECEFF4; 
+    border: none;
+    font: 500 16pt &quot;华文中宋&quot;;
+    border-radius: 8px;
+    padding: 2px;
+}
+
+QPushButton:hover {
+    background-color: #f06a51;
+}
+
+QPushButton:pressed {
+    background-color: #f27a62;
+}
+</string>
         </property>
         <property name="text">
          <string>来个番茄</string>
@@ -176,6 +201,9 @@
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -189,8 +217,30 @@
        <widget class="QPushButton" name="timer_rest_bt">
         <property name="font">
          <font>
+          <family>华文中宋</family>
           <pointsize>16</pointsize>
+          <italic>false</italic>
+          <fontweight>Medium</fontweight>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">    QPushButton {  
+        background-color: #4bac4e; 
+	color: rgb(65, 214, 100);
+        color: #ECEFF4; 
+        border: none;
+        font: 500 16pt &quot;华文中宋&quot;;
+        border-radius: 8px;
+        padding: 2px;
+    }
+QPushButton:hover {
+    background-color: #5fc35f;
+}
+
+QPushButton:pressed {
+    background-color: #6fd36f;
+}
+</string>
         </property>
         <property name="text">
          <string>休息一下</string>
@@ -201,6 +251,9 @@
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -214,8 +267,30 @@
        <widget class="QPushButton" name="timer_custom_bt">
         <property name="font">
          <font>
+          <family>华文中宋</family>
           <pointsize>16</pointsize>
+          <italic>false</italic>
+          <fontweight>Medium</fontweight>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {  
+    background-color: #db79de; 
+    color: #ECEFF4; 
+    border: none;
+    font: 500 16pt &quot;华文中宋&quot;;
+    border-radius: 8px;
+    padding: 2px;
+}
+
+QPushButton:hover {
+    background-color: #e588e8;
+}
+
+QPushButton:pressed {
+    background-color: #ef97f2;
+}
+</string>
         </property>
         <property name="text">
          <string>自定义</string>
@@ -226,6 +301,9 @@
        <spacer name="horizontalSpacer_4">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -428,6 +506,9 @@
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::MinimumExpanding</enum>
+        </property>
         <property name="sizeHint" stdset="0">
          <size>
           <width>40</width>
@@ -440,13 +521,21 @@
        <widget class="QPushButton" name="timer_start_bt">
         <property name="styleSheet">
          <string notr="true">QPushButton {
-	border: none;
-	color: #ECEFF4;
-	background-color: #2E3440;
-	font: 500 12pt &quot;SimHei&quot;;
-	border-radius: 6px;
-	width: 93px;  
+    border: none;
+    color: #ECEFF4;
+    background-color: #2E3440;
+    font: 500 12pt &quot;SimHei&quot;;
+    border-radius: 6px;
+    width: 93px;  
     height: 28px;  
+}
+
+QPushButton:hover {
+    background-color: #3B4252;
+}
+
+QPushButton:pressed {
+    background-color: #434C5E;
 }</string>
         </property>
         <property name="text">
@@ -458,13 +547,21 @@
        <widget class="QPushButton" name="timer_stop_bt">
         <property name="styleSheet">
          <string notr="true">QPushButton {
-	border: none;
-	color: #ECEFF4;
-	background-color: #2E3440;
-	font: 500 12pt &quot;SimHei&quot;;
-	border-radius: 6px;
-	width: 93px;  
+    border: none;
+    color: #ECEFF4;
+    background-color: #2E3440;
+    font: 500 12pt &quot;SimHei&quot;;
+    border-radius: 6px;
+    width: 93px;  
     height: 28px;  
+}
+
+QPushButton:hover {
+    background-color: #3B4252;
+}
+
+QPushButton:pressed {
+    background-color: #434C5E;
 }</string>
         </property>
         <property name="text">
@@ -476,13 +573,21 @@
        <widget class="QPushButton" name="timer_reset_bt">
         <property name="styleSheet">
          <string notr="true">QPushButton {
-	border: none;
-	color: #ECEFF4;
-	background-color: #2E3440;
-	font: 500 12pt &quot;SimHei&quot;;
-	border-radius: 6px;
-	width: 93px;  
+    border: none;
+    color: #ECEFF4;
+    background-color: #2E3440;
+    font: 500 12pt &quot;SimHei&quot;;
+    border-radius: 6px;
+    width: 93px;  
     height: 28px;  
+}
+
+QPushButton:hover {
+    background-color: #3B4252;
+}
+
+QPushButton:pressed {
+    background-color: #434C5E;
 }</string>
         </property>
         <property name="text">
@@ -494,6 +599,9 @@
        <spacer name="horizontalSpacer_8">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::MinimumExpanding</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
