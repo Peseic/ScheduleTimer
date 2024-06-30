@@ -5,6 +5,9 @@
 #include <QColor>
 
 QString generateButtonQSS(const QColor& bgColor);
-QString adjustColorBrightness(const QColor& color, int delta);
+
+QColor generateBorderColor(const QColor& bgColor);
+QColor generateHoverColor(const QColor& bgColor);
+QColor generatePressedColor(const QColor& bgColor);
 
 #endif // BUTTONSTYLES_H

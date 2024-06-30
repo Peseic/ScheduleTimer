@@ -173,16 +173,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->setWindowTitle(Q_GLOBAL_STATIC_CLASS(WindowTitles).MAINWINDOW_WINDOW_TITLE);
 
-    /*  // UI: Change button style after text edited. This feature might be ditched.
-    for(int i = 0; i < 7; i++){
-        for(int k = 0; k < 12; k++){
-            auto& button = day_class[i][k];
-            connect(button, &QPushButton::textChanged, this, [this, button]() {
-                updateButtonStyle(button);
-            });
-        }
-    }
-    */
 }
 
 MainWindow::~MainWindow()
@@ -430,10 +420,50 @@ void MainWindow::update_class_info(QString name, int hours, int minutes, int sec
 {
     qDebug() << "Updated class: " << name << " Duration: " << hours << "h " << minutes << "m " << seconds << "s";
 
-    day_class[which_day][which_class - 1]->setText(name);
+    int duration = std::max(hours, 1);
+    qDebug() << "New duration is: " << duration;
 
-    // Update button style if class name is not null
+    // Update the first button
+    qDebug("update_class_info is setting text for the first button");
+    day_class[which_day][which_class - 1]->setText(name);
+    qDebug("...done");
+    qDebug("update_class_info is setting style for the first button");
     updateButtonStyleIfNeeded(which_day, which_class - 1);
+    qDebug("...done");
+
+
+
+    // Update subsequent buttons
+    for (int i = 1; i < duration; ++i) {
+        qDebug("update_class_info SHOULD update subsequent buttons");
+        if ((which_class - 1 + i) < 12) {
+            qDebug("update_class_info is setting text for a subsequent button");
+            day_class[which_day][which_class - 1 + i]->setText(name);
+            qDebug("...done");
+            qDebug("update_class_info is setting style for a subsequent button");
+            updateButtonStyleIfNeeded(which_day, which_class - 1 + i);
+            qDebug("...done");
+
+            // Update the SQL database for subsequent buttons
+            QString updateSubsequentSql = QString(
+                                              "UPDATE %1 SET "
+                                              "class%2 = ? "
+                                              "WHERE date = ?"
+                                              ).arg(username).arg(which_class + i);
+
+            QSqlQuery subsequentQuery;
+            subsequentQuery.prepare(updateSubsequentSql);
+            subsequentQuery.addBindValue(name);
+            subsequentQuery.addBindValue(days[which_day]->text());
+            if (!subsequentQuery.exec()) {
+                qDebug() << "SQL update failed for subsequent button: " << subsequentQuery.lastError();
+            } else {
+                qDebug() << "SQL update succeeded for subsequent button";
+            }
+        } else {
+            break;
+        }
+    }
 
     int key = 100 * which_day + which_class;
     classInfoMap[key] = {name, hours, minutes, seconds};
